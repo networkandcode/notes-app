@@ -1,0 +1,46 @@
+button {
+    background-color: green;
+    border: none;
+    font-size: 20px;
+    color: whitesmoke;
+    margin: 5px;
+}
+
+button:disabled {
+    background-color: grey;
+}
+
+button.mode {
+    background-color: grey;
+}
+
+ button.mode:focus {
+    background-color: green;
+}
+
+button.delete {
+    background-color: red;
+}
+
+div.notecard {
+    border-bottom: 0.2px groove grey; 
+    font-size: 15px;
+    margin-bottom: 25px;
+    padding: 5px;
+}
+
+span {
+    margin: 5px;
+}
+
+textarea {
+    border: 50% solid;
+    font-size: 14px;
+    height: 500px;
+    padding: 8px;
+    width: 90%;
+}
+
+textarea:hover {
+    border-color: darkgrey;
+}
