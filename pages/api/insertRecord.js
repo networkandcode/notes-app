@@ -7,8 +7,8 @@ const insertRecord = async(req, res) => {
 
     let data = JSON.stringify({
         operation: "insert",
-        schema: "notes",
-        table: "notes",
+        schema: process.env.HDB_SCHEMA,
+        table: process.env.HDB_TABLE,
         records: [
             record,
         ]

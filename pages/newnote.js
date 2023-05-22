@@ -8,32 +8,34 @@ const NewNote = () => {
     const { addNote } = data;
     
     const router = useRouter()
-    const { user, error, isLoading } = useUser()
+    const { user } = useUser()
     
     const [ note, setNote ] = useState()
 
     const onChange = e => {
         e.preventDefault()
-        setNote(e.target.value)
+        const { value } = e.target
+        setNote(value)
     }
 
-    const onClick = async(e) => {
+    const handleAdd = async(e) => {
         e.preventDefault()
         
-        const record = JSON.stringify({ 
+        const recordAsJson = {
             email: user.email,
-            note
-        })
+            note,
+        }
+        const recordAsString = JSON.stringify(recordAsJson)
 
         await fetch('/api/insertRecord', {
-            body: record,
+            body: recordAsString,
             headers: {
                 'Content-Type': 'application/json',
             },
             method: 'POST',
         }).then((res) => {
             if (res.status === 200) {
-                addNote(record)
+                addNote(recordAsJson)
                 setNote('')
                 router.push('/')
             }
@@ -44,11 +46,11 @@ const NewNote = () => {
 
     return (
         <>
-        <div style={{ margin: `5px` }}>
-        <label htmlFor="note"> New note: </label>
-        <button disabled={note ? false : true} onClick={onClick}> Add </button>
-        </div>
-        <textarea id="note" name="note" onChange={onChange} placeHolder="Add your note here..." value={note} />
+            <div style={{ margin: `5px` }}>
+                <label htmlFor="note"> New note: </label>
+                <button disabled={note ? false : true} onClick={handleAdd}> Add </button>
+            </div>
+            <textarea id="note" name="note" onChange={onChange} placeHolder="Add your note here..." value={note} />
         </>
     )
 }

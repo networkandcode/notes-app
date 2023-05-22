@@ -14,10 +14,7 @@ const Note = () => {
     useEffect(() => {
         const { id } = router.query
         if(id) setNote(getNote(id))
-        console.log(17, id)
     }, [data, router])
-
-    console.log(20, note)
 
     if (!note) return <> Loading... </>
 

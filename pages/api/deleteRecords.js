@@ -2,12 +2,11 @@ import axios from 'axios'
 
 const deleteRecords = async(req, res) => {
     const ids = req.body
-    console.log(5, ids)
-
+    
     let data = JSON.stringify({
         operation: "delete",
-        schema: "notes",
-        table: "notes",
+        schema: process.env.HDB_SCHEMA,
+        table: process.env.HDB_TABLE,
         hash_values: ids,
     })
       

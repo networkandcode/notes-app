@@ -12,7 +12,7 @@ const EditNote = (props) => {
     const [ note, setNote ] = useState(props.note)
     const [ isButtonDisabled, setIsButtonDisabled ] = useState(true)
 
-    const onChange = e => {
+    const handleEdit = e => {
         e.preventDefault()
         const { name, value } = e.target
         setNote({ ...note, [name]: value })
@@ -65,8 +65,6 @@ const EditNote = (props) => {
 
     if (!user) return <></>
 
-    console.log(note)
-
     return (
         <>
         <div style={{ margin: `5px` }}>
@@ -74,7 +72,7 @@ const EditNote = (props) => {
         <button disabled={isButtonDisabled} onClick={onClick}> Save </button>
         <button className='delete' onClick={handleDelete} > Delete </button>
         </div>
-        <textarea id="note" name="note" onChange={handleDelete} value={note?.note} />
+        <textarea id="note" name="note" onChange={handleEdit} value={note?.note} />
         </>
     )
 }

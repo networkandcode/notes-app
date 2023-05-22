@@ -13,6 +13,8 @@ const useDataProvider = () => {
 
     // add note locally
     const addNote = async(note) => {
+        console.log(16, note)
+        console.log(17, notes)
         setNotes([ ...notes, note ])
     }
 
@@ -43,8 +45,6 @@ const useDataProvider = () => {
 
     // get note locally
     const getNote = (id) => {
-        console.log(id)
-        console.log(notes)
         let note
         notes?.forEach(i => {
             if (i.id === id) {

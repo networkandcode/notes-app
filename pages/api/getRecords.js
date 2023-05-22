@@ -3,11 +3,12 @@ import axios from 'axios'
 const getRecords = (req, res) => {
     const email = req.body
 
-    console.log(6, email)
+    const schema = process.env.HDB_SCHEMA
+    const table = process.env.HDB_TABLE
     
     let data = JSON.stringify({
         operation: "sql",
-        sql: `SELECT * FROM notes.notes WHERE email = "${email}"`
+        sql: `SELECT * FROM ${schema}.${table} WHERE email = "${email}"`
     })
 
 let config = {
