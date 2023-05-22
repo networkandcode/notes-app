@@ -29,6 +29,13 @@ div.notecard {
     padding: 5px;
 }
 
+input {
+    font-size: 14px;
+    margin: 5px;
+    padding: 2px;
+    width: 300px;
+}
+
 span {
     margin: 5px;
 }

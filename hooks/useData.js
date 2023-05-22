@@ -16,6 +16,21 @@ const useDataProvider = () => {
         setNotes([ ...notes, note ])
     }
 
+    // delete notes locally
+    const deleteNotes = async(ids) => {
+        let notesCopy = notes
+
+        ids.forEach(id => {
+            notes?.forEach((i, idx) => {
+                if (i.id === id) {
+                    notesCopy.splice(idx, 1)
+                }
+            })
+        })
+        
+        setNotes(notesCopy)
+    }
+
     // get notes from db
     const getNotes = async(body) => {
         const res = await fetch('/api/getRecords', {
@@ -40,7 +55,7 @@ const useDataProvider = () => {
     }
 
     // update note locally
-    const updateNote = (id) => {
+    const updateNote = (note) => {
         let notesCopy = notes
 
         notes?.forEach((i, idx) => {
@@ -51,7 +66,7 @@ const useDataProvider = () => {
 
         console.log(notesCopy)
         
-        setNotes([...notesCopy])
+        setNotes([...notesCopy, note])
     }
 
     useEffect(() => {
@@ -62,6 +77,7 @@ const useDataProvider = () => {
 
     return {
         addNote,
+        deleteNotes,
         getNote,
         notes,
         updateNote,

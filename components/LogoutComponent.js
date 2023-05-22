@@ -7,7 +7,23 @@ const LogoutComponent = () => {
     if (isLoading) return <div> Loading... </div>
     if (error) return <div> {error.message} </div>
 
-    if (!user) return <a href="/api/auth/login"> Login </a>
+    if (!user) return (
+        <div style={{
+            alignItems: `center`,
+            display: `flex`,
+            height: `300px`,
+            justifyContent: `center`
+        }}>
+            <div style={{
+                border: `1px solid lightgrey`,
+                padding: `20px`,
+                textAlign: `center`
+            }}>
+                <h2> Notes app </h2>
+                <p> <a href="/api/auth/login"> Login </a> </p>
+            </div>
+        </div>
+    )
 
     return (
         <>

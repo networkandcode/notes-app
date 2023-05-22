@@ -5,10 +5,9 @@ import { useState } from 'react'
 
 const EditNote = (props) => {
     const data = useData()
-    const { updateNote } = data;
-    
+    const { deleteNotes, updateNote } = data;
+    const { user, } = useUser()
     const router = useRouter()
-    const { user, error, isLoading } = useUser()
     
     const [ note, setNote ] = useState(props.note)
     const [ isButtonDisabled, setIsButtonDisabled ] = useState(true)
@@ -37,21 +36,45 @@ const EditNote = (props) => {
             method: 'POST',
         }).then((res) => {
             if (res.status === 200) {
-                updateNote(note.id)
+                updateNote(note)
                 setIsButtonDisabled(true)
+            }
+        })
+    }
+
+    const handleDelete = async(e) => {
+        e.preventDefault()
+        const { id } = note
+        let ids = [ id ]
+        ids = JSON.stringify(ids)
+        const body = ids
+
+        await fetch('/api/deleteRecords', {
+            body,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            method: 'POST',
+        }).then((res) => {
+            if (res.status === 200) {
+                deleteNotes([id])
+                router.push('/')
             }
         })
     }
 
     if (!user) return <></>
 
+    console.log(note)
+
     return (
         <>
         <div style={{ margin: `5px` }}>
         <label htmlFor="note"> Edit note: </label>
         <button disabled={isButtonDisabled} onClick={onClick}> Save </button>
+        <button className='delete' onClick={handleDelete} > Delete </button>
         </div>
-        <textarea id="note" name="note" onChange={onChange} value={note.note} />
+        <textarea id="note" name="note" onChange={handleDelete} value={note?.note} />
         </>
     )
 }
