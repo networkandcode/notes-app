@@ -1,5 +1,5 @@
-name: Docker
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+name: Docker build and push
+run-name: Docker build and push, ${{ github.run_number }} 🚀
 on: [ push ]
   #push:
     #branches: [ "main" ]
@@ -9,6 +9,8 @@ env:
 jobs:
   Build-Image-And-Push-To-Docker-Hub:
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
