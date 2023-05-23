@@ -1,9 +1,13 @@
+import { withApiAuthRequired, getSession } from '@auth0/nextjs-auth0';
 import axios from 'axios'
 
 const updateRecord = async(req, res) => {
+    const { user } = await getSession(req, res)
+    if (!user.sub) {
+        throw new Error('User not authenticated')
+    }
+    
     const record = req.body
-
-    console.log(6, Object.keys(record))
 
     let data = JSON.stringify({
         operation: "update",
@@ -31,8 +35,8 @@ const updateRecord = async(req, res) => {
             res.status(200).json({ message })
         })
         .catch((error) => {
-            //console.log(error);
+            console.log(error);
         })
 }
 
-export default updateRecord
+export default withApiAuthRequired(updateRecord)

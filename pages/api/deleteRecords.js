@@ -1,6 +1,12 @@
+import { withApiAuthRequired, getSession } from '@auth0/nextjs-auth0';
 import axios from 'axios'
 
 const deleteRecords = async(req, res) => {
+    const { user } = await getSession(req, res)
+    if (!user.sub) {
+        throw new Error('User not authenticated')
+    }
+
     const ids = req.body
     
     let data = JSON.stringify({
@@ -31,4 +37,4 @@ const deleteRecords = async(req, res) => {
         })
 }
 
-export default deleteRecords
+export default withApiAuthRequired(deleteRecords)

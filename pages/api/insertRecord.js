@@ -1,9 +1,13 @@
+import { withApiAuthRequired, getSession } from '@auth0/nextjs-auth0'
 import axios from 'axios'
 
 const insertRecord = async(req, res) => {
-    const record = req.body
+    const { user } = await getSession(req, res)
+    if (!user.sub) {
+        throw new Error('User not authenticated')
+    }
 
-    console.log(6, Object.keys(record))
+    const record = req.body
 
     let data = JSON.stringify({
         operation: "insert",
@@ -35,4 +39,4 @@ const insertRecord = async(req, res) => {
         })
 }
 
-export default insertRecord
+export default withApiAuthRequired(insertRecord)

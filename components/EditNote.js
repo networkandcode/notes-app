@@ -1,5 +1,5 @@
 import { useData } from '../hooks/useData'
-import { useUser } from '@auth0/nextjs-auth0/client'
+import { useUser, } from '@auth0/nextjs-auth0/client'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 
