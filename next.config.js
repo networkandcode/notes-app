@@ -8,6 +8,12 @@ module.exports = {
           port: '',
           pathname: '/**',
         },
+        {
+          protocol: 'https',
+          hostname: 's.gravatar.com',
+          port: '',
+          pathname: '/**',
+        },
       ],
     },
 }
