@@ -19,17 +19,18 @@ const Home = () => {
     }
 
     useEffect(() => {
-        if (search) {
+        if (search.trim()) {
+            console.log(23, search)
             let temp = []
-            search.split().forEach(searchWord => {
-                notes.forEach(note => {
-                    console.log(note.note)
-                    if (note.note.toLowerCase().includes(searchWord)) {
-                        if (!temp.includes(note)) {
-                            temp = [ ...temp, note ]
-                        }
+            notes.forEach(note => {
+                if (search.split(' ').every(searchWord => {
+                    searchWord = searchWord.trim()
+                    return note.note.toLowerCase().includes(searchWord)
+                })) {
+                    if (!temp.includes(note)) {
+                        temp = [ ...temp, note ]
                     }
-                })
+                }
             })
             setShowNotes(temp)
         } else {
