@@ -24,7 +24,7 @@ const Home = () => {
             let temp = []
             notes.forEach(note => {
                 if (search.split(' ').every(searchWord => {
-                    searchWord = searchWord.trim()
+                    searchWord = searchWord.trim().toLowerCase()
                     return note.note.toLowerCase().includes(searchWord)
                 })) {
                     if (!temp.includes(note)) {
