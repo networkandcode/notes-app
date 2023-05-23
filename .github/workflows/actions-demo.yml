@@ -10,6 +10,7 @@ jobs:
   Build-Image-And-Push-To-Docker-Hub:
     runs-on: ubuntu-latest
     permissions:
+      id-token: write
       packages: write
     steps:
       - name: Check out repository code
