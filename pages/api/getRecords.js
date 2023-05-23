@@ -1,6 +1,12 @@
+import { withApiAuthRequired, getSession } from '@auth0/nextjs-auth0'
 import axios from 'axios'
 
-const getRecords = (req, res) => {
+const getRecords = async(req, res) => {
+    const { user } = await getSession(req, res)
+    if (!user.sub) {
+        throw new Error('User not authenticated')
+    }
+
     const email = req.body
 
     const schema = process.env.HDB_SCHEMA
@@ -22,7 +28,7 @@ let config = {
   data : data
 };
 
-axios.request(config)
+await axios.request(config)
 .then((response) => {
     const records = response.data
     res.status(200).json(records)
@@ -33,4 +39,4 @@ axios.request(config)
 
 }
 
-export default getRecords
+export default withApiAuthRequired(getRecords)
