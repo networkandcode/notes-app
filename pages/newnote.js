@@ -1,5 +1,7 @@
 import { useData } from '../hooks/useData'
 import { useUser } from '@auth0/nextjs-auth0/client'
+import Head from 'next/head'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 
@@ -46,11 +48,16 @@ const NewNote = () => {
 
     return (
         <>
+            <Head>
+                <meta content='Add a new note' name='description'/>
+                <title> New note </title>
+            </Head>
+            <Link href="/api/auth/logout"> Logout </Link>
             <div style={{ margin: `5px` }}>
                 <label htmlFor="note"> New note: </label>
                 <button disabled={note ? false : true} onClick={handleAdd}> Add </button>
             </div>
-            <textarea id="note" name="note" onChange={onChange} placeHolder="Add your note here..." value={note} />
+            <textarea id="note" name="note" onChange={onChange} placeholder="Add your note here..." value={note} />
         </>
     )
 }

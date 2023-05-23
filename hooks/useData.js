@@ -13,8 +13,6 @@ const useDataProvider = () => {
 
     // add note locally
     const addNote = async(note) => {
-        console.log(16, note)
-        console.log(17, notes)
         setNotes([ ...notes, note ])
     }
 
@@ -59,12 +57,10 @@ const useDataProvider = () => {
         let notesCopy = notes
 
         notes?.forEach((i, idx) => {
-            if (i.id === id) {
+            if (i.id === note.id) {
                 notesCopy.splice(idx, 1)
             }
         })
-
-        console.log(notesCopy)
         
         setNotes([...notesCopy, note])
     }

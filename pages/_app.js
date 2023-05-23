@@ -1,5 +1,5 @@
 // pages/_app.js
-import LogoutComponent from '../components/LogoutComponent'
+import Authenticate from '../components/Authenticate'
 import { DataProvider } from '../hooks/useData'
 import '../styles/global.css'
 
@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }) {
   return (
     <UserProvider>
       <DataProvider>
-        <LogoutComponent/>
+        <Authenticate/>
         <Component {...pageProps} />
       </DataProvider>
     </UserProvider>

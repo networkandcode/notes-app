@@ -1,6 +1,7 @@
 import { useData } from '../hooks/useData'
 
 import { useUser } from '@auth0/nextjs-auth0/client'
+import Head from 'next/head'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
@@ -19,8 +20,7 @@ const Home = () => {
     }
 
     useEffect(() => {
-        if (search.trim()) {
-            console.log(23, search)
+        if (search?.trim()) {
             let temp = []
             notes.forEach(note => {
                 if (search.split(' ').every(searchWord => {
@@ -44,16 +44,20 @@ const Home = () => {
 
     return (
         <>
+            <Head>
+                <meta content='View and search notes' name='description'/>
+                <title> Home </title>
+            </Head>
             <div style={{ padding: `10px` }}>
                 <label htmlFor='search'>
                     Search:
                 </label>
-                <input name={search} onChange={handleSearch} type="text" value={search} />
+                <input id="search" name={search} onChange={handleSearch} type="text" value={search} />
             </div>
             
             <div>
                 { showNotes?.map((note) => (
-                    <Link href={`/note/${note.id}`}>
+                    <Link href={`/note/${note.id}`} key={note.id}>
                         <textarea readOnly style={{ height: `200px`, margin: `10px`, overflow: `hidden`, width: `400px` }} value={note.note} />
                     </Link>
                 ))}

@@ -1,7 +1,11 @@
 import { useUser } from '@auth0/nextjs-auth0/client'
+import Head from 'next/head'
+import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
-const LogoutComponent = () => {
+const Authenicate = () => {
+    const router = useRouter()
     const { user, error, isLoading } = useUser()
 
     if (isLoading) return <div> Loading... </div>
@@ -20,7 +24,7 @@ const LogoutComponent = () => {
                 textAlign: `center`
             }}>
                 <h2> Notes app </h2>
-                <p> <a href="/api/auth/login"> Login </a> </p>
+                <p> <Link href="/api/auth/login"> Login </Link> </p>
             </div>
         </div>
     )
@@ -28,9 +32,9 @@ const LogoutComponent = () => {
     return (
         <>
             <div>
-                <a href="/api/auth/logout"> Logout </a>
+                <Link href="/api/auth/logout"> Logout </Link>
             </div>
-            <img alt={user.name} src={user.picture} />
+            <Image alt={user.name} height={100} priority={true} src={user.picture} width={100}/>
             <h2> {user.name} </h2>
             <p> {user.email} </p>
             <div style={{ marginBottom: `25px` }}>
@@ -45,4 +49,4 @@ const LogoutComponent = () => {
     )
 }
 
-export default LogoutComponent
+export default Authenicate

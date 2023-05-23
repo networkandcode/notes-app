@@ -1,5 +1,7 @@
 import EditNote from '../../components/EditNote'
 import { useData } from '../../hooks/useData'
+import Head from 'next/head'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
@@ -14,14 +16,21 @@ const Note = () => {
     useEffect(() => {
         const { id } = router.query
         if(id) setNote(getNote(id))
-    }, [data, router])
+    }, [getNote, router])
 
     if (!note) return <> Loading... </>
 
     return (
-        <div>
-            <EditNote note={note} />
-        </div>
+        <>
+            <Head>
+                <meta content='Edit or Delete note' name='description'/>
+                <title> Edit or Delete note </title>
+            </Head>
+            <Link href="/api/auth/logout"> Logout </Link>
+            <div>
+                <EditNote note={note} />
+            </div>
+        </>
     )
 }
 
